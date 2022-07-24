@@ -1,5 +1,6 @@
 import datetime
 import json
+import os
 import random
 import time
 import hashlib
@@ -209,7 +210,7 @@ def target():
 
 
 
-def push_plus_bot(content):
+def push_plus_bot(content,push_token):
     b = content
     headers = {
         "Host": "www.pushplus.plus",
@@ -221,7 +222,7 @@ def push_plus_bot(content):
     }
     url = 'http://www.pushplus.plus/api/send'
     data = {
-        "token": 'f41e605cf752414d9cc832b6c144c302',
+        "token": push_token,
         "title": '抖音果园任务',
         "content": b,
         "channel": "wechat",
@@ -239,84 +240,84 @@ def push_plus_bot(content):
 
 
 if __name__ == '__main__':
-    print('抖音浇水任务开始,开始点击首页图标')
-    polling_info()
-    start_time = datetime.datetime.now().strftime('%H')
-    if start_time == '06':
-        print('开始领取水滴日常任务奖励')
-        day_water()
-        time.sleep(random.randint(1, 4))
-        print('开始水车任务')
-        waterwheel()
-    elif start_time == '07':
-        print('开始收集蓄水池任务')
-        reward_bottle()
-    elif start_time == '08':
-        print('开始领取水滴日常任务奖励')
-        day_water()
-        time.sleep(random.randint(1,4))
-        print('开始七天登录奖励')
-        sign()
-        time.sleep(random.randint(1, 4))
-        print('选择宝箱奖励任务')
-        choose_box_reward()
-        time.sleep(random.randint(1, 4))
-        print('开始领点击水车任务')
-        waterwheel()
-        time.sleep(random.randint(1, 4))
-        print('签到领化肥')
-        sign_fertilizer()
-        time.sleep(random.randint(1, 4))
-        print('开始领取水滴日常任务奖励')
-        day_water()
-        time.sleep(random.randint(5, 10))
-        print('开始三餐领取任务')
-        eat()
-        time.sleep(random.randint(1, 4))
-        print('开始每日领取宝箱奖励任务')
-        judy_fertilizer()
-        time.sleep(random.randint(1, 4))
-        print('开始推送信息')
-        message = target()
-        push_plus_bot(message)
-    elif start_time == '12':
-        print('开始三餐领取任务')
-        eat()
-        time.sleep(random.randint(1, 4))
-        waterwheel()
-        time.sleep(random.randint(2, 6))
-        print('开始领取水滴日常任务奖励')
-        day_water()
-    elif start_time == '18':
-        print('开始三餐领取任务')
-        eat()
-        time.sleep(random.randint(1, 4))
-        waterwheel()
-        time.sleep(random.randint(2, 6))
-        print('开始领取水滴日常任务奖励')
-        day_water()
-    elif start_time == '19':
-        print('开始领取挑战宝箱奖励')
-        recive_box_reward()
-    elif start_time == '21':
-        time.sleep(random.randint(2, 6))
-        print('开始领取水滴日常任务奖励')
-        day_water()
-        time.sleep(random.randint(1, 4))
-        print('继续浇完剩余水量')
-        watering()
-        print('开始推送信息')
-        message = target()
-        push_plus_bot(message)
+    cks = os.environ['dygyCookies'].split('@')
+    push_token = os.environ['push_token']
+    for ck in cks:
+        headers1 = {
+            'Cookie': ck,
+        }
+        headers.update(headers1)
+        print('抖音浇水任务开始,开始点击首页图标')
+        polling_info()
+        start_time = datetime.datetime.now().strftime('%H')
+        if start_time == '06':
+            print('开始领取水滴日常任务奖励')
+            day_water()
+            time.sleep(random.randint(1, 4))
+            print('开始水车任务')
+            waterwheel()
+        elif start_time == '07':
+            print('开始收集蓄水池任务')
+            reward_bottle()
+        elif start_time == '08':
+            print('开始领取水滴日常任务奖励')
+            day_water()
+            time.sleep(random.randint(1,4))
+            print('开始七天登录奖励')
+            sign()
+            time.sleep(random.randint(1, 4))
+            print('选择宝箱奖励任务')
+            choose_box_reward()
+            time.sleep(random.randint(1, 4))
+            print('开始领点击水车任务')
+            waterwheel()
+            time.sleep(random.randint(1, 4))
+            print('签到领化肥')
+            sign_fertilizer()
+            time.sleep(random.randint(1, 4))
+            print('开始领取水滴日常任务奖励')
+            day_water()
+            time.sleep(random.randint(5, 10))
+            print('开始三餐领取任务')
+            eat()
+            time.sleep(random.randint(1, 4))
+            print('开始每日领取宝箱奖励任务')
+            judy_fertilizer()
+            time.sleep(random.randint(1, 4))
+            print('开始推送信息')
+            message = target()
+        elif start_time == '12':
+            print('开始三餐领取任务')
+            eat()
+            time.sleep(random.randint(1, 4))
+            waterwheel()
+            time.sleep(random.randint(2, 6))
+            print('开始领取水滴日常任务奖励')
+            day_water()
+        elif start_time == '18':
+            print('开始三餐领取任务')
+            eat()
+            time.sleep(random.randint(1, 4))
+            waterwheel()
+            time.sleep(random.randint(2, 6))
+            print('开始领取水滴日常任务奖励')
+            day_water()
+        elif start_time == '19':
+            print('开始领取挑战宝箱奖励')
+            recive_box_reward()
+        elif start_time == '21':
+            time.sleep(random.randint(2, 6))
+            print('开始领取水滴日常任务奖励')
+            day_water()
+            time.sleep(random.randint(1, 4))
+            print('继续浇完剩余水量')
+            watering()
+            print('开始推送信息')
+            message = target()
+            push_plus_bot(message,push_token)
 
 
 
 """
-https://proxy.guodongbaohe.com/coins/award?member_id=5970135&timestamp=1652963503&trans_id=60380ea65b77a49e5bb3d22fe0796c72&signature=795a17591802e719b22e83aadd38e1dfmember_id=5970135&platform=android&timestamp=1652843004&f193cf711baac6eef95c61a573a36115
-trans_id=devzwldz2e3z201
-member_id=5970135&platform=android&timestamp=1652843778&trans_id=a7f1f6f533c1fb2fd5c79f33828b9017&f193cf711baac6eef95c61a573a36115 
-https://proxy.guodongbaohe.com/coins/award?member_id=5970135&platform=android&timestamp=1652842620&trans_id=5adccefc72f29e8c7b1bfc5cc240ba85&signature=bdc3f00f3f1c6ebcb9a9f3bf36aa3d37&
-https://proxy.guodongbaohe.com/coins/award?member_id=5970135&platform=android&timestamp=1652843778&trans_id=8cb2f6b635d35a41a170d75547852261&signature=61cb9cbb965388e64a954c8bed6018cb& 
-https://proxy.guodongbaohe.com/coins/award?member_id=5970135&platform=android&timestamp=1652964694&trans_id=ff80c2c29e89790024a0493edf56be76&signature=bb4bb5c84a64408600ce9e149116899f& 
-https://proxy.guodongbaohe.com/coins/award?member_id=5970135&platform=android&timestamp=1652964925&trans_id=4da1d25d02a5e9d1705d187b16e47786&signature=b3ce3ac512c001c53b4a9af3e36297d9& 
+ff668ac51ae0c803&eyJleHAiOjE2NTQ5MTkwNjEsImtpZCI6MCwiYWxnIjoiSFMyNTYifQ.eyJ1aWQiOiI4ODgyNTIwNiIsIm9wZW5pZCI6Im9ZYlZMeExnZThibWFINFhvSVQyMDdQWlJyV3ciLCJleHAiOjE2NTQ5MTkwNjF9.z7QV2gTs2U4tc9OyX02i6kCpw3H7qo7vfQWGe4Itx-g&eyJleHAiOjE2NjI2OTMyNjEsImFsZyI6IkhTMjU2In0.eyJ1aWQiOiI4ODgyNTIwNiIsIm9wZW5pZCI6Im9ZYlZMeExnZThibWFINFhvSVQyMDdQWlJyV3ciLCJleHAiOjE2NjI2OTMyNjF9.7CESzUCev6obxvP-vJWQw1elM2Jcj2jAlzoN6ORiy40
 """

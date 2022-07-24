@@ -3,7 +3,7 @@ import json
 import pprint
 import random
 import time
-
+import os
 import requests
 
 headers = {
@@ -95,7 +95,7 @@ def jsjd():
     return response['result']['levelDesc']
 
 
-def push_plus_bot(content):
+def push_plus_bot(content,push_token):
     b = content
     headers = {
         "Host": "www.pushplus.plus",
@@ -107,7 +107,7 @@ def push_plus_bot(content):
     }
     url = 'http://www.pushplus.plus/api/send'
     data = {
-        "token": 'f41e605cf752414d9cc832b6c144c302',
+        "token": push_token,
         "title": '网易严选果园任务',
         "content": b,
         "channel": "wechat",
@@ -126,6 +126,7 @@ def push_plus_bot(content):
 
 if __name__ == '__main__':
     start_time = datetime.datetime.now().strftime('%H')
+    push_token = os.environ["push_token"]
     if start_time == '01':
         print('开始领取签到奖励')
         sign()
@@ -166,4 +167,4 @@ if __name__ == '__main__':
         time.sleep(random.randint(1, 4))
         print('开始推送信息')
         message=jsjd()
-        push_plus_bot(f"5斤六鳌蜜薯{message}")
+        push_plus_bot(f"5斤六鳌蜜薯{message}",push_token)
