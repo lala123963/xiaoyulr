@@ -317,7 +317,7 @@ def waterwheel_droplets(tubetoken, userid):
     response = requests.post(url=url, data=body, headers=headers).json()
     if response["status"] == 1:
         gain_amount =response['gain_amount']
-        print(f'水车水滴收取成功,一共收取{gain_amount/100}水滴')
+        print(f'水车水滴收取成功,一共收取{gain_amount/1000}水滴')
     else:
         print('无水车或者水车水滴不足')
 
@@ -336,7 +336,7 @@ def watering(tubetoken, userid):
         print(f'浇10滴水,水瓶目前还剩{response["now_water_amount"]}水滴')
         if int(response["now_water_amount"]) >= 10:
             watering(tubetoken, userid)
-            time.sleep(random.randint(1, 3))
+            time.sleep(random.randint(3, 6))
         else:
             print('浇水完成')
     else:
@@ -409,9 +409,9 @@ if __name__ == '__main__':
             print('开始领搜索领水滴任务')
             search(tubetoken, ck[0])
             time.sleep(random.randint(3, 5))
-            print('开始集水滴任务')
-            water_droplets(tubetoken, ck[0])
-            time.sleep(random.randint(3, 5))
+            # print('开始集水滴任务')
+            # water_droplets(tubetoken, ck[0])
+            # time.sleep(random.randint(3, 5))
             print('开始领水平水滴任务')
             bottle(tubetoken, ck[0])
             time.sleep(random.randint(3, 5))
@@ -448,3 +448,5 @@ if __name__ == '__main__':
             watering(tubetoken, ck[0])
             message = percent(ck[1], ck[0])
             push_plus_bot(message, push_token)
+
+
